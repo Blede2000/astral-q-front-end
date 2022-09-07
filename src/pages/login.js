@@ -1,15 +1,27 @@
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
-import Button from '@/components/Button'
+// import Button from '@/components/Button'
 import GuestLayout from '@/components/Layouts/GuestLayout'
-import Input from '@/components/Input'
-import InputError from '@/components/InputError'
-import Label from '@/components/Label'
+// import Input from '@/components/Input'
+// import InputError from '@/components/InputError'
+// import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import {
+    TextInput,
+    PasswordInput,
+    Checkbox,
+    Anchor,
+    Paper,
+    Title,
+    Text,
+    Container,
+    Group,
+    Button,
+} from '@mantine/core'
 
 const Login = () => {
     const router = useRouter()
@@ -36,7 +48,13 @@ const Login = () => {
     const submitForm = async event => {
         event.preventDefault()
 
-        login({ email, password, remember: shouldRemember, setErrors, setStatus })
+        login({
+            email,
+            password,
+            remember: shouldRemember,
+            setErrors,
+            setStatus,
+        })
     }
 
     return (
@@ -45,17 +63,16 @@ const Login = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <ApplicationLogo width={120} height={120} />
                         </a>
                     </Link>
                 }>
-
                 {/* Session Status */}
-                <AuthSessionStatus className="mb-4" status={status} />
+                <AuthSessionStatus status={status} />
 
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
-                    <div>
+                    {/* <div>
                         <Label htmlFor="email">Email</Label>
 
                         <Input
@@ -69,10 +86,10 @@ const Login = () => {
                         />
 
                         <InputError messages={errors.email} className="mt-2" />
-                    </div>
+                    </div> */}
 
                     {/* Password */}
-                    <div className="mt-4">
+                    {/* <div className="mt-4">
                         <Label htmlFor="password">Password</Label>
 
                         <Input
@@ -85,11 +102,14 @@ const Login = () => {
                             autoComplete="current-password"
                         />
 
-                        <InputError messages={errors.password} className="mt-2" />
-                    </div>
+                        <InputError
+                            messages={errors.password}
+                            className="mt-2"
+                        />
+                    </div> */}
 
                     {/* Remember Me */}
-                    <div className="block mt-4">
+                    {/* <div className="block mt-4">
                         <label
                             htmlFor="remember_me"
                             className="inline-flex items-center">
@@ -98,16 +118,18 @@ const Login = () => {
                                 type="checkbox"
                                 name="remember"
                                 className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                onChange={event => setShouldRemember(event.target.checked)}
+                                onChange={event =>
+                                    setShouldRemember(event.target.checked)
+                                }
                             />
 
                             <span className="ml-2 text-sm text-gray-600">
                                 Remember me
                             </span>
                         </label>
-                    </div>
+                    </div> */}
 
-                    <div className="flex items-center justify-end mt-4">
+                    {/* <div className="flex items-center justify-end mt-4">
                         <Link href="/forgot-password">
                             <a className="underline text-sm text-gray-600 hover:text-gray-900">
                                 Forgot your password?
@@ -115,7 +137,7 @@ const Login = () => {
                         </Link>
 
                         <Button className="ml-3">Login</Button>
-                    </div>
+                    </div> */}
                 </form>
             </AuthCard>
         </GuestLayout>
