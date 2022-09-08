@@ -20,6 +20,9 @@ export default function App(props) {
                 withNormalizeCSS
                 theme={{
                     /** Put your mantine theme override here */
+                    fontFamily: 'Rubik, sans-serif',
+                    fontFamilyMonospace: 'Monaco, Courier, monospace',
+                    headings: { fontFamily: 'Rubik, sans-serif' },
                     colorScheme: 'light',
                 }}>
                 <Component {...pageProps} />
