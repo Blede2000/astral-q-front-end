@@ -1,11 +1,26 @@
-import { Container, Paper } from '@mantine/core'
+import { Box, Center, Container, Paper, createStyles } from '@mantine/core'
 
-const AuthCard = ({ logo, children }) => (
-    <Paper size={420} withBorder shadow="md" p={30} radius="md">
-        <div>{logo}</div>
+const AuthCard = ({ logo, children }) => {
+    const { classes } = useStyles()
 
-        {children}
-    </Paper>
-)
+    return (
+        <Paper
+            withBorder
+            p={30}
+            shadow="md"
+            radius="lg"
+            className={classes.card}>
+            <Center mb={50}>{logo}</Center>
+
+            {children}
+        </Paper>
+    )
+}
+
+const useStyles = createStyles((theme, _params, getRef) => ({
+    card: {
+        width: 450,
+    },
+}))
 
 export default AuthCard

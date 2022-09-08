@@ -1,13 +1,13 @@
-const InputError = ({ messages = [], className = '' }) => (
+import { Text } from '@mantine/core'
+
+const InputError = ({ messages = [] }) => (
     <>
         {messages.length > 0 && (
             <>
                 {messages.map((message, index) => (
-                    <p
-                        className={`${className} text-sm text-red-600`}
-                        key={index}>
+                    <Text key={index} color="red">
                         {message}
-                    </p>
+                    </Text>
                 ))}
             </>
         )}

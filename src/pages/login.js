@@ -4,7 +4,7 @@ import AuthSessionStatus from '@/components/AuthSessionStatus'
 // import Button from '@/components/Button'
 import GuestLayout from '@/components/Layouts/GuestLayout'
 // import Input from '@/components/Input'
-// import InputError from '@/components/InputError'
+import InputError from '@/components/InputError'
 // import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
@@ -21,6 +21,7 @@ import {
     Container,
     Group,
     Button,
+    Box,
 } from '@mantine/core'
 
 const Login = () => {
@@ -71,42 +72,54 @@ const Login = () => {
                 <AuthSessionStatus status={status} />
 
                 <form onSubmit={submitForm}>
-                    {/* Email Address */}
-                    {/* <div>
-                        <Label htmlFor="email">Email</Label>
-
-                        <Input
-                            id="email"
-                            type="email"
+                    <Box>
+                        <TextInput
+                            placeholder="Your email"
                             value={email}
-                            className="block mt-1 w-full"
                             onChange={event => setEmail(event.target.value)}
-                            required
-                            autoFocus
+                            label="Email"
+                            withAsterisk
                         />
+                        <InputError messages={errors.email} />
+                    </Box>
 
-                        <InputError messages={errors.email} className="mt-2" />
-                    </div> */}
-
-                    {/* Password */}
-                    {/* <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
-
-                        <Input
-                            id="password"
-                            type="password"
+                    <Box mt={10}>
+                        <PasswordInput
+                            placeholder="Password"
                             value={password}
-                            className="block mt-1 w-full"
                             onChange={event => setPassword(event.target.value)}
-                            required
-                            autoComplete="current-password"
+                            label="Password"
+                            withAsterisk
                         />
+                        <InputError messages={errors.password} />
+                    </Box>
 
-                        <InputError
-                            messages={errors.password}
-                            className="mt-2"
-                        />
-                    </div> */}
+                    <Box>
+                        <Group position="apart" mt="md">
+                            <Checkbox
+                                label="Remember me"
+                                name="remember"
+                                checked={shouldRemember}
+                                onChange={event =>
+                                    setShouldRemember(event.target.checked)
+                                }
+                            />
+                            <Link href="/forgot-password">
+                                <Anchor size="sm" color="violet">
+                                    Forgot your password?
+                                </Anchor>
+                            </Link>
+                        </Group>
+                    </Box>
+
+                    <Box mt="xl">
+                        <Button
+                            fullWidth
+                            variant="gradient"
+                            gradient={{ from: 'indigo', to: 'violet' }}>
+                            Sign in
+                        </Button>
+                    </Box>
 
                     {/* Remember Me */}
                     {/* <div className="block mt-4">
