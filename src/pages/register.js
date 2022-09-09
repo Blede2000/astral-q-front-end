@@ -1,13 +1,11 @@
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
-import Button from '@/components/Button'
 import GuestLayout from '@/components/Layouts/GuestLayout'
-import Input from '@/components/Input'
 import InputError from '@/components/InputError'
-import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
+import { Anchor, Box, Button, PasswordInput, TextInput } from '@mantine/core'
 
 const Register = () => {
     const { register } = useAuth({
@@ -24,7 +22,13 @@ const Register = () => {
     const submitForm = event => {
         event.preventDefault()
 
-        register({ name, email, password, password_confirmation: passwordConfirmation, setErrors })
+        register({
+            name,
+            email,
+            password,
+            password_confirmation: passwordConfirmation,
+            setErrors,
+        })
     }
 
     return (
@@ -33,91 +37,74 @@ const Register = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <ApplicationLogo width={120} height={120} />
                         </a>
                     </Link>
                 }>
-
                 <form onSubmit={submitForm}>
-                    {/* Name */}
-                    <div>
-                        <Label htmlFor="name">Name</Label>
-
-                        <Input
-                            id="name"
-                            type="text"
+                    <Box>
+                        <TextInput
+                            placeholder="Your name"
                             value={name}
-                            className="block mt-1 w-full"
                             onChange={event => setName(event.target.value)}
-                            required
-                            autoFocus
+                            label="Name"
+                            withAsterisk
                         />
+                        <InputError messages={errors.name} />
+                    </Box>
 
-                        <InputError messages={errors.name} className="mt-2" />
-                    </div>
-
-                    {/* Email Address */}
-                    <div className="mt-4">
-                        <Label htmlFor="email">Email</Label>
-
-                        <Input
-                            id="email"
-                            type="email"
+                    <Box mt={10}>
+                        <TextInput
+                            placeholder="Your email"
                             value={email}
-                            className="block mt-1 w-full"
                             onChange={event => setEmail(event.target.value)}
-                            required
+                            label="Email"
+                            withAsterisk
                         />
+                        <InputError messages={errors.email} />
+                    </Box>
 
-                        <InputError messages={errors.email} className="mt-2" />
-                    </div>
-
-                    {/* Password */}
-                    <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
-
-                        <Input
-                            id="password"
-                            type="password"
+                    <Box mt={10}>
+                        <PasswordInput
+                            placeholder="Password"
                             value={password}
-                            className="block mt-1 w-full"
                             onChange={event => setPassword(event.target.value)}
-                            required
+                            label="Password"
                             autoComplete="new-password"
+                            withAsterisk
                         />
+                        <InputError messages={errors.password} />
+                    </Box>
 
-                        <InputError messages={errors.password} className="mt-2" />
-                    </div>
-
-                    {/* Confirm Password */}
-                    <div className="mt-4">
-                        <Label htmlFor="passwordConfirmation">
-                            Confirm Password
-                        </Label>
-
-                        <Input
-                            id="passwordConfirmation"
-                            type="password"
+                    <Box mt={10}>
+                        <PasswordInput
+                            placeholder="Confirm Password"
                             value={passwordConfirmation}
-                            className="block mt-1 w-full"
                             onChange={event =>
                                 setPasswordConfirmation(event.target.value)
                             }
-                            required
+                            label="Confirm Password"
+                            withAsterisk
                         />
+                        <InputError messages={errors.password_confirmation} />
+                    </Box>
 
-                        <InputError messages={errors.password_confirmation} className="mt-2" />
-                    </div>
-
-                    <div className="flex items-center justify-end mt-4">
+                    <Box mt={35}>
                         <Link href="/login">
-                            <a className="underline text-sm text-gray-600 hover:text-gray-900">
+                            <Anchor size="sm" color="violet">
                                 Already registered?
-                            </a>
+                            </Anchor>
                         </Link>
-
-                        <Button className="ml-4">Register</Button>
-                    </div>
+                        <Button
+                            fullWidth
+                            type="submit"
+                            variant="gradient"
+                            mt={5}
+                            sx={{ height: 45 }}
+                            gradient={{ from: 'indigo', to: 'violet' }}>
+                            Register
+                        </Button>
+                    </Box>
                 </form>
             </AuthCard>
         </GuestLayout>
