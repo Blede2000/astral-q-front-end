@@ -1,10 +1,12 @@
 import ApplicationLogo from '@/components/Utils/ApplicationLogo'
 import AuthCard from '@/components/Cards/AuthCard'
-import Button from '@/components/Button'
+// import Button from '@/components/Button'
 import GuestLayout from '@/components/Layouts/GuestLayout'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
+import { Alert, Box, Button, Text } from '@mantine/core'
+import { IconAlertCircle } from '@tabler/icons'
 
 const VerifyEmail = () => {
     const { logout, resendEmailVerification } = useAuth({
@@ -20,37 +22,57 @@ const VerifyEmail = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <ApplicationLogo width={120} height={120} />
                         </a>
                     </Link>
                 }>
-                <div className="mb-4 text-sm text-gray-600">
-                    Thanks for signing up! Before getting started, could you
-                    verify your email address by clicking on the link we just
-                    emailed to you? If you didn't receive the email, we will
-                    gladly send you another.
-                </div>
-
                 {status === 'verification-link-sent' && (
-                    <div className="mb-4 font-medium text-sm text-green-600">
+                    <Alert
+                        icon={<IconAlertCircle size={16} />}
+                        color="green"
+                        my="xl"
+                        styles={theme => ({
+                            message: {
+                                color: theme.colors.green[8],
+                                paddingRight: 10,
+                            },
+                        })}>
                         A new verification link has been sent to the email
                         address you provided during registration.
-                    </div>
+                    </Alert>
                 )}
 
-                <div className="mt-4 flex items-center justify-between">
+                <Box mb="xl">
+                    <Text size="sm" align="center">
+                        Thanks for signing up! Before getting started, could you
+                        verify your email address by clicking on the link we
+                        just emailed to you? If you didn't receive the email, we
+                        will gladly send you another.
+                    </Text>
+                </Box>
+
+                <Box>
                     <Button
-                        onClick={() => resendEmailVerification({ setStatus })}>
+                        onClick={() => resendEmailVerification({ setStatus })}
+                        fullWidth
+                        variant="gradient"
+                        mt={5}
+                        sx={{ height: 45 }}
+                        gradient={{ from: 'indigo', to: 'violet' }}>
                         Resend Verification Email
                     </Button>
 
-                    <button
+                    <Button
+                        onClick={logout}
+                        fullWidth
                         type="button"
-                        className="underline text-sm text-gray-600 hover:text-gray-900"
-                        onClick={logout}>
+                        variant="subtle"
+                        mt={5}
+                        sx={{ height: 45 }}
+                        color="violet">
                         Logout
-                    </button>
-                </div>
+                    </Button>
+                </Box>
             </AuthCard>
         </GuestLayout>
     )

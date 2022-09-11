@@ -1,11 +1,21 @@
+import { Alert } from '@mantine/core'
+import { IconAlertCircle } from '@tabler/icons'
+
 const AuthSessionStatus = ({ status, className, ...props }) => (
     <>
         {status && (
-            <div
-                className={`${className} font-medium text-sm text-green-600`}
-                {...props}>
+            <Alert
+                icon={<IconAlertCircle size={16} />}
+                color="green"
+                my="xl"
+                styles={theme => ({
+                    message: {
+                        color: theme.colors.green[8],
+                        paddingRight: 10,
+                    },
+                })}>
                 {status}
-            </div>
+            </Alert>
         )}
     </>
 )
